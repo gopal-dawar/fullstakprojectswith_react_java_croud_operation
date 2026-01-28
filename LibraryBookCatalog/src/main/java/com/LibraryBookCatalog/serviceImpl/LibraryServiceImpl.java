@@ -22,7 +22,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public List<Library> searchByAuthor(String author) {
-        return libraryRepo.searchByAuthor(author);
+        return libraryRepo.findByAuthorContaining(author);
     }
 
     @Override
@@ -36,13 +36,18 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public String deleteById(String isbn) {
-        libraryRepo.deleteByIsBn(isbn);
+    public String deleteByIsbn(String isbn) {
+        libraryRepo.deleteByIsbn(isbn);
         return "Successfully Deleted Book!";
     }
 
     @Override
     public Library findBookById(int id) {
         return libraryRepo.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found at : " + id));
+    }
+
+    @Override
+    public List<Library> viewAllBooks() {
+        return libraryRepo.findAll();
     }
 }

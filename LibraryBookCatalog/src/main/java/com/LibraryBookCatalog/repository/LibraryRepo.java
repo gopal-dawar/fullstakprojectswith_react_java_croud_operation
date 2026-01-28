@@ -9,11 +9,9 @@ import java.util.List;
 
 public interface LibraryRepo extends JpaRepository<Library, Integer> {
 
-    @Query(value = "Select * from library where author like %:author%", nativeQuery = true)
-    public List<Library> searchByAuthor(@Param("author") String author);
+    @Query(value = "select * from library where author = :author", nativeQuery = true)
+    List<Library> findByAuthorContaining(@Param("author") String author);
 
-
-    @Query(value = "Select * from library where isbn = :isbn", nativeQuery = true)
-    public void deleteByIsBn(@Param("isbn") String isbn);
-
+    @Query(value = "select * from library where isbn =:isbn", nativeQuery = true)
+    int deleteByIsbn(@Param("isbn") String isbn);
 }

@@ -3,17 +3,20 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className="bg-sky-600 w-1/6 h-screen">
       <div>
-        <ul>
-          <li>
+        <ul className="flex flex-col text-white gap-2 ">
+          <li className="hover:bg-sky-950 p-2">
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/">Add Books</NavLink>
+          <li className="hover:bg-sky-950 p-2">
+            <NavLink to="/addbook">Add Books</NavLink>
           </li>
-          <li>
-            <NavLink to="/">Search By Author</NavLink>
+          <li className="hover:bg-sky-950 p-2">
+            <NavLink to="/bookslist">Books List</NavLink>
+          </li>
+          <li className="hover:bg-sky-950 p-2">
+            <NavLink to="/searchbookbyauthor">Search By Author</NavLink>
           </li>
         </ul>
       </div>
