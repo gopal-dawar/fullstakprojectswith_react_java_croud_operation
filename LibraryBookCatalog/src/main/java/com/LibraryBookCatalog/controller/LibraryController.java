@@ -35,9 +35,10 @@ public class LibraryController {
     }
 
     @DeleteMapping("/delete/{isbn}")
-    public ResponseEntity<String> deleteById(@PathVariable String isbn) {
-        return new ResponseEntity<>(libraryService.deleteById(isbn), HttpStatus.OK);
+    public ResponseEntity<String> deleteByIsbn(@PathVariable String isbn) {
+        return ResponseEntity.ok(libraryService.deleteByIsbn(isbn));
     }
+
 
 
     @GetMapping("/findbyid")
@@ -45,5 +46,9 @@ public class LibraryController {
         return new ResponseEntity<>(libraryService.findBookById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/viewAll")
+    public ResponseEntity<List<Library>> viewAllBooks() {
+        return new ResponseEntity<>(libraryService.viewAllBooks(), HttpStatus.OK);
+    }
 
 }

@@ -12,9 +12,12 @@ public interface LibraryService {
 
     Library updateAvailableCopiesById(int id, Library library);
 
-    String deleteById(String isbn);
+    String deleteByIsbn(String isbn);
 
     Library findBookById(int id);
+
+    List<Library> viewAllBooks();
+
 
 }
 
