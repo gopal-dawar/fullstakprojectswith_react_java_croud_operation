@@ -9,8 +9,8 @@ export const createAccount = (accountData) => {
 };
 
 // READ Account by ID
-export const getAccountById = (accountId) => {
-  return axios.get(`${BASE_URL}/viewById/${accountId}`);
+export const getAccountById = async (accountId) => {
+  return await axios.get(`${BASE_URL}/viewById/${accountId}`);
 };
 
 // UPDATE Account
@@ -19,6 +19,6 @@ export const updateAccount = (accountId, accountData) => {
 };
 
 // DELETE Account
-export const deleteAccount = (accountId) => {
-  return axios.delete(`${BASE_URL}/delete/${accountId}`);
+export const deleteAccount = async (accountId) => {
+  return await axios.delete(`${BASE_URL}/delete/${accountId}`);
 };

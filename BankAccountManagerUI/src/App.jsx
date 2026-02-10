@@ -14,7 +14,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/addaccount" element={<AddAccount />} />
           <Route path="/viewaccount" element={<VIewAccountById />} />
-          <Route path="/updateaccount" element={<UpdateAccount />} />
+          <Route path="/updateaccount/:id" element={<UpdateAccount />} />
         </Route>
       </Routes>
     </>
