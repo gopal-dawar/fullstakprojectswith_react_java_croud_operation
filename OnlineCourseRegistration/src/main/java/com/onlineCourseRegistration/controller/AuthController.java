@@ -28,8 +28,10 @@ public class AuthController {
 
     @PostMapping("/login")
     public Map<String, String> loginpage(@RequestBody Map<String, String> data) {
+
         String username = data.get("username");
         String password = data.get("password");
+
         UserInfo user = courseUserRepo.findByUsername(username).orElseThrow();
 
         if (user.getPassword().equals(password)) {
