@@ -1,33 +1,55 @@
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./auth/AuthContext";
+
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import PrivateRoute from "./auth/PrivateRoute";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
 
-function App() {
+// simple auth check (session-based)
+const isAuthenticated = async () => {
+  try {
+    const res = await fetch("http://localhost:8080/hello", {
+      credentials: "include",
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+};
+
+// protected route component
+const PrivateRoute = ({ children }) => {
+  const [allowed, setAllowed] = React.useState(null);
+
+  React.useEffect(() => {
+    isAuthenticated().then(setAllowed);
+  }, []);
+
+  if (allowed === null) return <p>Loading...</p>;
+  return allowed ? children : <Navigate to="/login" />;
+};
+
+const App = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-          {/* Default route */}
-          <Route path="/" element={<Navigate to="/login" />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute> 
+          }
+        />
 
-          <Route path="/login" element={<Login />} />
-
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+        {/* default route */}
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

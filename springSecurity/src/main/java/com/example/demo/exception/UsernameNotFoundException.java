@@ -5,3 +5,4 @@ public class UsernameNotFoundException extends RuntimeException {
         super(msg);
     }
 }
+
